@@ -2,3 +2,10 @@ language: node_js
 node_js: node
 services:
 - mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: lwnyF4lTT3bXy80RT88tGa5s8g9zL26flLhbbWzP+zbM3LYx+AoTspAtCYk4IbPvRiBmdZC5uquebmkZF+RgDzhNoHcmP2L3i14b6+MSVatjozZF79sOB/TyLBYTCB3C7+T63JMGDrDOvTyaZbcYyVH5sjaBFkist2iQv5PuH1FXDI+/ktOPcpF2oABwa8FDNaX1FSypvpaMLjZ6ftEyqvXZYMsH9/YgqfJrIeQDg165z5o+TYxihMyPNcAHYywV6UinW/yaYJGSslESFaq1NbJ88K5LwiXiWt6tVw2/P8rdTxUTAcTH3etUxryl2A90qyhAxGfxnYDwsDau3I60begIhpcPSTvuyl/Qzgu++EaQ6NUHbpTpamzsG5CnB6uEAUxZUigbju5iQ8UBjrG1Yoa9mgFcJcOu7X0J+sVL9SRcOP2ExecN0/+/mmTsiBjdTzB2Ur1w/uyEMFlNs0t0eXB3g1y8XU4fylCux5rpbzuPkcLViOJvzIy3lbzfxmXhjR4wV30nXzJLsUYAWjEJOoMpClJhPOXrMEFojQ4xmDdLhCfFGSgmUHIT1Limo2Ee1ltU5Qt07h9vGvgCFLCUuuvmIE8Pb5dt6XLqWZWZhLJumttsy+8DpJFTU7OQFmCJAC02aNXo3YEasyU02X2HzVyvNWipI/MccUMVqYTcQsI=
+  app: protected-journey-16038
+  on:
+    repo: dobo-n-Christ/blog-app-mongoose-tests
