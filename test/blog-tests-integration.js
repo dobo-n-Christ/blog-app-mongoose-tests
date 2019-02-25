@@ -15,11 +15,11 @@ chai.use(chaiHttp);
 
 function generateBlogPostData() {
     return {
-        title: faker.lorem.words,
-        content: faker.lorem.paragraph,
+        title: faker.lorem.sentence(),
+        content: faker.lorem.text(),
         author: {
-            firstName: faker.name.firstName,
-            lastName: faker.name.lastName
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName()
         }
     };
 };
@@ -86,7 +86,7 @@ describe('BlogPosts API resource', function() {
             .then(function(post) {
                 expect(resPost.title).to.equal(post.title);
                 expect(resPost.content).to.equal(post.content);
-                expect(resPost.author).to.equal(post.author);
+                expect(resPost.author).to.equal(post.authorName);
             });
         });
     });
@@ -102,15 +102,17 @@ describe('BlogPosts API resource', function() {
                 expect(res).to.be.json;
                 expect(res.body).to.be.a('object');
                 expect(res.body).to.include.keys('id', 'title', 'content', 'author', 'created');
+                expect(res.body.id).to.not.be.null;
                 expect(res.body.title).to.equal(newPost.title);
                 expect(res.body.content).to.equal(newPost.content);
-                expect(res.body.author).to.equal(newPost.author);
+                expect(res.body.author).to.equal(`${newPost.author.firstName} ${newPost.author.lastName}`);
                 return BlogPost.findById(res.body.id);
             })
             .then(function(post) {
                 expect(post.title).to.equal(newPost.title);
                 expect(post.content).to.equal(newPost.content);
-                expect(post.author).to.equal(newPost.author);
+                expect(post.author.firstName).to.equal(newPost.author.firstName);
+                expect(post.author.lastName).to.equal(newPost.author.lastName);
             });
         });
     });
@@ -120,7 +122,10 @@ describe('BlogPosts API resource', function() {
             const updatePost = {
                 title: 'Newness',
                 content: 'For all is newness here.',
-                author: 'New Man'
+                author: {
+                    firstName: 'New',
+                    lastName: 'Man'
+                }
             };
             return BlogPost.findOne()
             .then(function(post) {
@@ -136,7 +141,8 @@ describe('BlogPosts API resource', function() {
             .then(function(post) {
                 expect(post.title).to.equal(updatePost.title);
                 expect(post.content).to.equal(updatePost.content);
-                expect(post.author).to.equal(updatePost.author);
+                expect(post.author.firstName).to.equal(updatePost.author.firstName);
+                expect(post.author.lastName).to.equal(updatePost.author.lastName);
             });
         });
     });
